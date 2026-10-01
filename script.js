@@ -30,52 +30,42 @@ if (menuToggle && nav) {
 const year = document.getElementById("year");
 if (year) year.textContent = new Date().getFullYear();
 
-const form = document.getElementById("contact-form");
-const status = document.getElementById("form-status");
+const copyEmailBtn = document.getElementById("copy-email-btn");
+const copyBtnText = document.getElementById("copy-btn-text");
+const copyStatus = document.getElementById("copy-status");
+const emailAddress = "webforgemodernwebsites@gmail.com";
 
-if (form && status) {
-  const submitButton = form.querySelector('button[type="submit"]');
-
-  form.addEventListener("submit", async (event) => {
-    event.preventDefault();
-
-    if (form.dataset.submitting === "true") return;
-
-    form.dataset.submitting = "true";
-    if (submitButton) submitButton.disabled = true;
-    status.classList.add("is-visible");
-    status.classList.remove("is-error");
-    status.textContent = "Sending your inquiry...";
-
+if (copyEmailBtn) {
+  copyEmailBtn.addEventListener("click", async () => {
     try {
-      const endpoint = new URL(form.action);
-      endpoint.pathname = `/ajax${endpoint.pathname}`;
-
-      const response = await fetch(endpoint, {
-        method: form.method,
-        headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json",
-        },
-        body: JSON.stringify(Object.fromEntries(new FormData(form))),
-      });
-      const result = await response.json();
-
-      if (!response.ok || (result.success !== true && result.success !== "true")) {
-        throw new Error("FormSubmit did not confirm the submission.");
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        await navigator.clipboard.writeText(emailAddress);
+      } else {
+        const textarea = document.createElement("textarea");
+        textarea.value = emailAddress;
+        textarea.style.position = "fixed";
+        textarea.style.opacity = "0";
+        document.body.appendChild(textarea);
+        textarea.select();
+        document.execCommand("copy");
+        document.body.removeChild(textarea);
       }
 
-      status.textContent = "Your inquiry was submitted successfully. We'll be in touch soon.";
-      form.reset();
+      copyEmailBtn.classList.add("copied");
+      if (copyBtnText) copyBtnText.textContent = "Copied!";
+      if (copyStatus) copyStatus.textContent = "✓ Email copied to clipboard!";
+
+      setTimeout(() => {
+        copyEmailBtn.classList.remove("copied");
+        if (copyBtnText) copyBtnText.textContent = "Copy";
+        if (copyStatus) copyStatus.textContent = "";
+      }, 2500);
     } catch {
-      status.classList.add("is-error");
-      status.textContent = "We could not confirm your inquiry was submitted. Please try again or email webforgemodernwebsites@gmail.com.";
-    } finally {
-      delete form.dataset.submitting;
-      if (submitButton) submitButton.disabled = false;
+      if (copyStatus) copyStatus.textContent = "Please copy the email address manually.";
     }
   });
 }
+
 
 // Add a subtle reveal effect to content, with a safe fallback if reduced motion is enabled.
 const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
