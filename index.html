@@ -347,39 +347,36 @@
             taking shape.</p>
         </div>
       </div>
-      <form class="contact-form" id="contact-form" action="https://formsubmit.co/webforgemodernwebsites@gmail.com"
-        method="POST">
-        <input type="hidden" name="_subject" value="New WebForge Customer Inquiry">
-        <input type="hidden" name="_captcha" value="true">
-        <div class="form-row"><label for="name">Full name <span>*</span><input id="name" name="name" type="text"
-              autocomplete="name" placeholder="Your name" required></label><label for="email">Email address
-            <span>*</span><input id="email" name="email" type="email" autocomplete="email" placeholder="you@example.com"
-              required></label></div>
-        <label for="business">Business or project name<input id="business" name="business" type="text"
-            placeholder="What should we call your project?"></label>
-        <div class="form-row"><label for="project-type">Project type<select id="project-type" name="projectType">
-              <option value="">Choose a project type</option>
-              <option>Business website</option>
-              <option>E-commerce website</option>
-              <option>Landing page</option>
-              <option>Website redesign</option>
-              <option>Custom website</option>
-              <option>Other / not sure yet</option>
-            </select></label><label for="budget">Approximate budget <small>(optional)</small><select id="budget"
-              name="budget">
-              <option value="">Choose a range</option>
-              <option>Under $500</option>
-              <option>$500–$1,500</option>
-              <option>$1,500–$3,000</option>
-              <option>$3,000+</option>
-              <option>Not sure yet</option>
-            </select></label></div>
-        <label for="message">Tell us about your project <span>*</span><textarea id="message" name="message" rows="5"
-            placeholder="What do you want your website to do?" required></textarea></label>
-        <button class="button form-submit" type="submit">Send Inquiry <span>↗</span></button>
-        <p class="form-disclaimer">Your inquiry will be sent through FormSubmit to our email inbox.</p>
-        <p class="form-status" id="form-status" role="status" aria-live="polite"></p>
-      </form>
+      <div class="contact-form contact-direct-box">
+        <h3 class="direct-box-title">Get in Touch</h3>
+        <p class="direct-box-desc">
+          Have a project in mind or want to explore ideas? Reach out to us directly. We typically respond within 24 hours.
+        </p>
+
+        <div class="email-card">
+          <div class="email-info">
+            <span class="email-label">DIRECT EMAIL</span>
+            <span class="email-address" id="email-address-text">webforgemodernwebsites@gmail.com</span>
+          </div>
+          <button type="button" class="copy-button" id="copy-email-btn" aria-label="Copy email address">
+            <svg class="copy-icon" viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+              <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+            </svg>
+            <span class="copy-text" id="copy-btn-text">Copy</span>
+          </button>
+        </div>
+
+        <div class="direct-actions">
+          <a class="button button-gmail" href="https://mail.google.com/mail/?view=cm&fs=1&to=webforgemodernwebsites@gmail.com&su=WebForge%20Project%20Inquiry" target="_blank" rel="noopener noreferrer">
+            Compose in Gmail <span aria-hidden="true">↗</span>
+          </a>
+          <a class="button button-mail-client" href="mailto:webforgemodernwebsites@gmail.com?subject=WebForge%20Project%20Inquiry">
+            Open Mail App <span aria-hidden="true">✉</span>
+          </a>
+        </div>
+        <p class="copy-status" id="copy-status" role="status" aria-live="polite"></p>
+      </div>
     </section>
   </main>
 
